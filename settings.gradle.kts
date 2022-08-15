@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "StackOverflow"
+rootProject.name = "TodoApp"
 include(":domain")
 include(":data")
 include(":presenter")
