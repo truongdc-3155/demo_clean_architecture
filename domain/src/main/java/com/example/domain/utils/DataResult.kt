@@ -1,4 +1,4 @@
-package com.example.domain.base
+package com.example.domain.utils
 
 sealed class DataResult<out R> {
 

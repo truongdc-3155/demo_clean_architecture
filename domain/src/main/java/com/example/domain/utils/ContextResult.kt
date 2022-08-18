@@ -1,11 +1,11 @@
-package com.example.domain.base
+package com.example.domain.utils
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
-abstract class BaseUseCase {
+abstract class ContextResult {
 
     protected suspend fun <R> withContextResult(
         dispatcherContextIO: CoroutineContext = Dispatchers.Main,

@@ -11,7 +11,7 @@ data class ToDoItem(
     val toDoTitle: String
 ): ModelItem()
 
-open class ToDoItemMapper @Inject constructor() : ItemMapper<ToDo, ToDoItem> {
+open class ConvertToDoItemMapper @Inject constructor() : ItemMapper<ToDo, ToDoItem> {
     override fun mapToPresenter(model: ToDo) = ToDoItem(
         id = model.id,
         toDoTitle = model.toDoTitle

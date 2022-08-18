@@ -1,6 +1,7 @@
 package com.example.presenter.ui.fragment
 
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -19,12 +20,12 @@ class ToDoListFragment:
     BaseFragment<FragmentToDoListBinding> (FragmentToDoListBinding::inflate){
 
     private lateinit var todoAdapter  : TodoAdapter
-
     private val mViewModel : TodoViewModel by viewModels()
 
     override fun initView() {
         setUpRecyclerview()
         clickFabTask()
+        removeNoteSuccess()
     }
 
     override fun initData() {
@@ -33,7 +34,6 @@ class ToDoListFragment:
     private fun setUpRecyclerview() {
         todoAdapter = TodoAdapter(deleteTodo = { data ->
             mViewModel.removeTodo(data)
-            this@ToDoListFragment.context?.showToast("Delete Successsfully..")
         })
 
         binding.rvTodoList.apply {
@@ -41,7 +41,7 @@ class ToDoListFragment:
             adapter = todoAdapter
         }
 
-        mViewModel.getAll().observe(viewLifecycleOwner) { listTodo ->
+        mViewModel.allTodoObserver.observe(viewLifecycleOwner) { listTodo ->
             updateUi(listTodo)
             todoAdapter.mTodo = listTodo
         }
@@ -62,6 +62,12 @@ class ToDoListFragment:
         } else {
             binding.rvTodoList.visibility = View.GONE
             binding.cardView.visibility = View.VISIBLE
+        }
+    }
+
+    private fun removeNoteSuccess(){
+        mViewModel.removeObserver.observe(viewLifecycleOwner) {
+            Toast.makeText(this@ToDoListFragment.context, "Remove todo success!", Toast.LENGTH_SHORT).show()
         }
     }
 }
